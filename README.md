@@ -1,3 +1,6 @@
+![GitHub](https://img.shields.io/github/license/KTA552/UE-EditorLanguageToggle)
+![](https://img.shields.io/github/v/tag/KTA552/UE-EditorLanguageToggle?label=version)
+
 # UE-EditorLanguageToggle
 
 ## 日本語版
