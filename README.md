@@ -29,6 +29,12 @@ https://github.com/user-attachments/assets/c4410e6f-92fd-483b-89af-8a380010895d
 
 `Toolbar Position`をTopにすることでツールバー上にボタンの表示、Bottomにすることでステータスバーに表示されます。
 
+## 寄付
+Please ☕
+
+<a href="https://www.buymeacoffee.com/KTA552" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+
+
 ## English Version
 ### Overview
 This plugin allows you to quickly switch between your usual editor language and English.
@@ -52,3 +58,10 @@ Set your default language using `Selected Culture`.
 If you turn off `Enable Language Toggle`, the button will be hidden.
 
 Set `Toolbar Position` to Top to display the button in the toolbar, or Bottom to display it in the status bar.
+
+## Is this convenient for you?
+
+Please ☕
+
+<a href="https://www.buymeacoffee.com/KTA552" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+
