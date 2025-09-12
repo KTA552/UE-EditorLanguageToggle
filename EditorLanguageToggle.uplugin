@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
 	"Version": 1,
-	"VersionName": "1.0",
+	"VersionName": "1.1",
 	"FriendlyName": "Editor Language Toggle",
 	"Description": "Change Editor Language Quickly",
 	"Category": "Editor",
