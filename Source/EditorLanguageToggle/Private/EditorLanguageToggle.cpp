@@ -64,7 +64,7 @@ void FEditorLanguageToggleModule::RegisterMenu()
 
     UToolMenu* ToolbarMenu = nullptr;
     bool bIsTop = false;
-    if (Settings->ToolbarPosition == EToolbarPosition::Top)
+    if (Settings->ToolbarPosition == EToolbarPosition::Toolbar)
     {
         ToolbarMenu = UToolMenus::Get()->ExtendMenu("LevelEditor.LevelEditorToolBar.User");
         bIsTop = true;
