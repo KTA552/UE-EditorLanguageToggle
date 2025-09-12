@@ -27,7 +27,9 @@ void UEditorLanguageToggleSettings::PostEditChangeProperty(struct FPropertyChang
 	}
 	const FName PropertyName = PropertyChangedEvent.Property->GetFName();
 	if (PropertyName == GET_MEMBER_NAME_CHECKED(UEditorLanguageToggleSettings, bEnableLanguageToggle) ||
-		PropertyName == GET_MEMBER_NAME_CHECKED(UEditorLanguageToggleSettings, ToolbarPosition))
+		PropertyName == GET_MEMBER_NAME_CHECKED(UEditorLanguageToggleSettings, ToolbarPosition) ||
+		PropertyName == GET_MEMBER_NAME_CHECKED(UEditorLanguageToggleSettings, SourceCulture) ||
+		PropertyName == GET_MEMBER_NAME_CHECKED(UEditorLanguageToggleSettings, TargetCulture))
 	{
 		if (bEnableLanguageToggle)
 		{
@@ -41,6 +43,17 @@ void UEditorLanguageToggleSettings::PostEditChangeProperty(struct FPropertyChang
 	}
 	
 	OnSettingChanged().Broadcast(this, PropertyChangedEvent);
+}
+
+void UEditorLanguageToggleSettings::PostInitProperties()
+{
+	Super::PostInitProperties();
+	
+	// 初回起動時またはSourceCultureが空の場合、現在のエディタ言語を設定
+	if (SourceCulture.IsEmpty())
+	{
+		SourceCulture = FInternationalization::Get().GetCurrentCulture()->GetName();
+	}
 }
 #endif
 

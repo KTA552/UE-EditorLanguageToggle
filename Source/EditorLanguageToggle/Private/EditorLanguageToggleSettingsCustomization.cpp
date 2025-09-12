@@ -19,11 +19,13 @@ TSharedRef<IDetailCustomization> FEditorLanguageToggleSettingsCustomization::Mak
 
 void FEditorLanguageToggleSettingsCustomization::CustomizeDetails(IDetailLayoutBuilder& DetailBuilder)
 {
-    // SelectedCultureプロパティのハンドルを取得
-    TSharedRef<IPropertyHandle> SelectedCultureProperty = DetailBuilder.GetProperty(GET_MEMBER_NAME_CHECKED(UEditorLanguageToggleSettings, SelectedCulture));
+    // SourceCultureとTargetCultureプロパティのハンドルを取得
+    TSharedRef<IPropertyHandle> SourceCultureProperty = DetailBuilder.GetProperty(GET_MEMBER_NAME_CHECKED(UEditorLanguageToggleSettings, SourceCulture));
+    TSharedRef<IPropertyHandle> TargetCultureProperty = DetailBuilder.GetProperty(GET_MEMBER_NAME_CHECKED(UEditorLanguageToggleSettings, TargetCulture));
     
     // デフォルトのプロパティ表示を隠す
-    DetailBuilder.HideProperty(SelectedCultureProperty);
+    DetailBuilder.HideProperty(SourceCultureProperty);
+    DetailBuilder.HideProperty(TargetCultureProperty);
     
     // カスタムカテゴリを作成
     IDetailCategoryBuilder& CategoryBuilder = DetailBuilder.EditCategory("Default");
@@ -38,37 +40,67 @@ void FEditorLanguageToggleSettingsCustomization::CustomizeDetails(IDetailLayoutB
         LanguageComboOptions.Add(MakeShared<FEditorLanguageOption>(Option));
     }
     
-    // 現在選択されている値を取得
-    FString CurrentValue;
-    SelectedCultureProperty->GetValue(CurrentValue);
+    // Source Language用のカスタムプロパティ行を追加
+    FString SourceCurrentValue;
+    SourceCultureProperty->GetValue(SourceCurrentValue);
     
-    // 現在選択されているオプションを特定
-    TSharedPtr<FEditorLanguageOption> SelectedOption;
+    TSharedPtr<FEditorLanguageOption> SourceSelectedOption;
     for (const TSharedPtr<FEditorLanguageOption>& Option : LanguageComboOptions)
     {
-        if (Option->CultureCode == CurrentValue)
+        if (Option->CultureCode == SourceCurrentValue)
         {
-            SelectedOption = Option;
+            SourceSelectedOption = Option;
             break;
         }
     }
     
-    // カスタムプロパティ行を追加
-    CategoryBuilder.AddCustomRow(LOCTEXT("SelectedLanguage", "Selected Language"))
+    CategoryBuilder.AddCustomRow(LOCTEXT("SourceLanguage", "Source Language"))
     .NameContent()
     [
-        SelectedCultureProperty->CreatePropertyNameWidget()
+        SourceCultureProperty->CreatePropertyNameWidget()
     ]
     .ValueContent()
     [
         SNew(SComboBox<TSharedPtr<FEditorLanguageOption>>)
         .OptionsSource(&LanguageComboOptions)
-        .OnSelectionChanged(this, &FEditorLanguageToggleSettingsCustomization::OnLanguageSelectionChanged, SelectedCultureProperty)
+        .OnSelectionChanged(this, &FEditorLanguageToggleSettingsCustomization::OnLanguageSelectionChanged, SourceCultureProperty)
         .OnGenerateWidget(this, &FEditorLanguageToggleSettingsCustomization::OnGenerateLanguageWidget)
-        .InitiallySelectedItem(SelectedOption)
+        .InitiallySelectedItem(SourceSelectedOption)
         [
             SNew(STextBlock)
-            .Text(this, &FEditorLanguageToggleSettingsCustomization::GetSelectedLanguageText, SelectedCultureProperty)
+            .Text(this, &FEditorLanguageToggleSettingsCustomization::GetSelectedLanguageText, SourceCultureProperty)
+        ]
+    ];
+    
+    // Target Language用のカスタムプロパティ行を追加
+    FString TargetCurrentValue;
+    TargetCultureProperty->GetValue(TargetCurrentValue);
+    
+    TSharedPtr<FEditorLanguageOption> TargetSelectedOption;
+    for (const TSharedPtr<FEditorLanguageOption>& Option : LanguageComboOptions)
+    {
+        if (Option->CultureCode == TargetCurrentValue)
+        {
+            TargetSelectedOption = Option;
+            break;
+        }
+    }
+    
+    CategoryBuilder.AddCustomRow(LOCTEXT("TargetLanguage", "Target Language"))
+    .NameContent()
+    [
+        TargetCultureProperty->CreatePropertyNameWidget()
+    ]
+    .ValueContent()
+    [
+        SNew(SComboBox<TSharedPtr<FEditorLanguageOption>>)
+        .OptionsSource(&LanguageComboOptions)
+        .OnSelectionChanged(this, &FEditorLanguageToggleSettingsCustomization::OnLanguageSelectionChanged, TargetCultureProperty)
+        .OnGenerateWidget(this, &FEditorLanguageToggleSettingsCustomization::OnGenerateLanguageWidget)
+        .InitiallySelectedItem(TargetSelectedOption)
+        [
+            SNew(STextBlock)
+            .Text(this, &FEditorLanguageToggleSettingsCustomization::GetSelectedLanguageText, TargetCultureProperty)
         ]
     ];
 }

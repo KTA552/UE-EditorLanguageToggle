@@ -44,6 +44,7 @@ public:
     virtual FText GetSectionText() const override;
     virtual FText GetSectionDescription() const override;
     virtual void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent) override;
+    virtual void PostInitProperties() override;
 #endif
     
     UPROPERTY(EditAnywhere, config, Category="EditorLaunguageToggleSettings", meta=(DisplayName="Enable Language Toggle", ToolTip="Enable or disable the editor language toggle feature."))
@@ -52,8 +53,11 @@ public:
     UPROPERTY(EditAnywhere, config, Category="EditorLaunguageToggleSettings", meta=(EditCondition = bEnableLanguageToggle, DisplayName="Toolbar Position", ToolTip="The position of the language toggle button in the toolbar."))
     EToolbarPosition ToolbarPosition;
     
-    UPROPERTY(EditAnywhere, config, Category="EditorLaunguageToggleSettings", meta=(DisplayName="Selected Culture", ToolTip="The culture to switch to when toggling the editor language."))
-    FString SelectedCulture;
+    UPROPERTY(EditAnywhere, config, Category="EditorLaunguageToggleSettings", meta=(EditCondition = bEnableLanguageToggle, DisplayName="Source Language", ToolTip="The language to switch from when toggling the editor language."))
+    FString SourceCulture;
+    
+    UPROPERTY(EditAnywhere, config, Category="EditorLaunguageToggleSettings", meta=(EditCondition = bEnableLanguageToggle, DisplayName="Target Language", ToolTip="The language to switch to when toggling the editor language."))
+    FString TargetCulture = TEXT("en");
     
     // ドロップダウン用: カルチャーコードのリスト
     UFUNCTION()
@@ -92,4 +96,3 @@ public:
         return GetDefault<UEditorLanguageToggleSettings>();
     }
 };
-

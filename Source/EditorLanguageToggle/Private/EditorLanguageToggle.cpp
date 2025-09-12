@@ -87,7 +87,6 @@ void FEditorLanguageToggleModule::RegisterMenu()
 
     FToolMenuSection& Section = ToolbarMenu->AddSection("EditorLanguageToggle", LOCTEXT("EditorLanguageToggleSection", "Editor Language Toggle"), InsertPosition);
     FString CurrentCulture = FInternationalization::Get().GetCurrentCulture()->GetName();
-    FString TargetCulture = Settings->SelectedCulture;
     Section.AddEntry(FToolMenuEntry::InitToolBarButton(
         "EditorLanguageToggleSwitch",
         FUIAction(
@@ -95,8 +94,9 @@ void FEditorLanguageToggleModule::RegisterMenu()
             FCanExecuteAction(),
             FIsActionChecked::CreateLambda([this]()
             {
+                const UEditorLanguageToggleSettings* Settings = UEditorLanguageToggleSettings::Get();
                 FString CurrentCulture = FInternationalization::Get().GetCurrentCulture()->GetName();
-                return (CurrentCulture == "en");
+                return (CurrentCulture == Settings->TargetCulture);
             })
         ),
         FText::GetEmpty(),
@@ -136,16 +136,17 @@ void FEditorLanguageToggleModule::ToggleLanguage()
 {
     const UEditorLanguageToggleSettings* Settings = UEditorLanguageToggleSettings::Get();
     FString CurrentCulture = FInternationalization::Get().GetCurrentCulture()->GetName();
-    FString TargetCulture = Settings->SelectedCulture;
-
-    // 現在が設定値なら英語、英語なら設定値、それ以外は英語に切り替え
-    if (CurrentCulture == TargetCulture)
+    
+    // SourceCultureとTargetCultureの間で切り替え
+    if (CurrentCulture == Settings->TargetCulture)
     {
-        FInternationalization::Get().SetCurrentCulture("en");
+        // 現在がターゲット言語の場合、ソース言語に切り替え
+        FInternationalization::Get().SetCurrentCulture(Settings->SourceCulture);
     }
     else
     {
-        FInternationalization::Get().SetCurrentCulture(TargetCulture);
+        // それ以外の場合はターゲット言語に切り替え
+        FInternationalization::Get().SetCurrentCulture(Settings->TargetCulture);
     }
 }
 
