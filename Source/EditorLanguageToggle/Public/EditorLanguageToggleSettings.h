@@ -25,8 +25,8 @@ struct FEditorLanguageOption
 UENUM()
 enum class EToolbarPosition : uint8
 {
-    Top,
-    Bottom
+    Toolbar,
+    StatusBar
 };
 
 UCLASS(config=EditorPerProjectUserSettings, defaultconfig)
