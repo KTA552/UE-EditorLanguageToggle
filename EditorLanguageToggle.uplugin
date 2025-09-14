@@ -6,14 +6,15 @@
 	"Description": "Change Editor Language Quickly",
 	"Category": "Editor",
 	"CreatedBy": "Keita Nakamura",
-	"CreatedByURL": "",
-	"DocsURL": "",
-	"MarketplaceURL": "",
+	"CreatedByURL": "https://github.com/KTA552/UE-EditorLanguageToggle",
+	"DocsURL": "https://docs.google.com/document/d/1iUW3XP9Ta2eTBo8q3R62vyXJUZ71ongLBE-kUy__LEw/",
+	"MarketplaceURL": "https://www.fab.com/ja/portal/listings/2cf94703-85bd-4395-9c0e-5a90bc4a8f6c",
 	"SupportURL": "",
 	"EnabledByDefault": false,
 	"CanContainContent": true,
 	"IsBetaVersion": false,
 	"IsExperimentalVersion": false,
+    "EngineVersion": "5.6.0",
 	"Modules": [
 		{
 			"Name": "EditorLanguageToggle",
