@@ -12,8 +12,6 @@ public class EditorLanguageToggle : ModuleRules
         PrivateDependencyModuleNames.AddRange(new string[] {
             "Core", 
             "CoreUObject", 
-            "Engine", 
-            "UnrealEd", 
             "Slate", 
             "SlateCore", 
             "EditorFramework", 
@@ -26,7 +24,6 @@ public class EditorLanguageToggle : ModuleRules
             "EditorWidgets"  
         });
         PublicDependencyModuleNames.AddRange(new string[] {
-            "Core", "CoreUObject", "Engine"
         });
     }
 }
