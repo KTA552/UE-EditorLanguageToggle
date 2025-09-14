@@ -1,4 +1,8 @@
-﻿using UnrealBuildTool;
+﻿// Copyright (c) 2025 Keita Nakamura
+//
+// This file is part of the Editor Language Toggle plugin.
+
+using UnrealBuildTool;
 
 public class EditorLanguageToggle : ModuleRules
 {
