@@ -5,6 +5,10 @@
 
 ## 日本語版
 
+### Fab
+Fabでも公開中です。
+[URL](https://fab.com/s/25edd7ccd09d)
+
 ### 概要
 このプラグインは通常使用しているEditorの言語⇔英語の切り替えを素早く行うためだけのプラグインです。
 
@@ -31,6 +35,10 @@ https://github.com/user-attachments/assets/c4410e6f-92fd-483b-89af-8a380010895d
 
 
 ## English Version
+
+### Fab
+[URL](https://fab.com/s/25edd7ccd09d)
+
 ### Overview
 This plugin allows you to quickly switch between your usual editor language and English.
 
